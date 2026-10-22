@@ -1,0 +1,95 @@
+spring:
+  application:
+    name: api-gateway
+
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: user-service
+#          uri: ${USER_SERVICE_URI:lb://USER-SERVICE}
+#          predicates:
+#            - Path=/api/v1/user/**
+#          filters:
+#            - StripPrefix=2
+#
+#        - id: post-service
+#          uri: ${POSTS_SERVICE_URI:lb://POSTS-SERVICE}
+#          predicates:
+#            - Path=/api/v1/posts/**
+#          filters:
+#            - StripPrefix=2
+#            - name: AuthenticationFilter
+#
+#        - id: connections-service
+#          uri: ${CONNECTIONS_SERVICE_URI:lb://CONNECTIONS-SERVICE}
+#          predicates:
+#            - Path=/api/v1/connection/**
+#          filters:
+#            - StripPrefix=2
+#            - name: AuthenticationFilter
+#
+#        - id: uploader-service
+#          uri: ${UPLOADER_SERVICE_URI:lb://UPLOADER-SERVICE}
+#          predicates:
+#            - Path=/api/v1/uploads/**
+#          filters:
+#            - StripPrefix=2
+#            - name: AuthenticationFilter
+
+    #for API gateway for searching applications in eureka server
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/v1/user/**
+          filters:
+            - StripPrefix=2
+
+        - id: post-service
+          uri: lb://POSTS-SERVICE
+          predicates:
+            - Path=/api/v1/posts/**
+          filters:
+            - StripPrefix=2
+            - name: AuthenticationFilter
+
+        - id: connections-service
+          uri: lb://CONNECTIONS-SERVICE
+          predicates:
+            - Path=/api/v1/connection/**
+          filters:
+            - StripPrefix=2
+            - name: AuthenticationFilter
+
+        - id: uploader-service
+          uri: lb://UPLOADER-SERVICE
+          predicates:
+            - Path=/api/v1/uploads/**
+          filters:
+            - StripPrefix=2
+            - name: AuthenticationFilter
+
+
+jwt.secretKey: gjdbute48q8w32q9yo0p1lsbgftravv2684hbkmortrr5s0vnj1cckppqteibcjhfuf7890
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+# Register IP address instead of LAPTOP-7972CIF1.mshome.net
+eureka.instance.prefer-ip-address: true
+eureka.instance.ip-address: 127.0.0.1
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans

@@ -1,0 +1,26 @@
+spring.application.name: uploader-service
+
+server.servlet.context-path: /uploads
+server.port: 9016
+
+# Discovery service (default url for eureka server to register the service)
+
+eureka.client.service-url.defaultZone: http://localhost:8761/eureka
+
+cloudinary:
+  cloud-name: wbj7kfdh
+  api-key: 479545584872496
+  api-secret: ornulzN6ABNAPW6_W7v5dTqO1J8
+
+
+  # Register IP address instead of LAPTOP-7972CIF1.mshome.net
+eureka.instance.prefer-ip-address: true
+eureka.instance.ip-address: 127.0.0.1
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+    export:
+      zipkin:
+        endpoint: http://localhost:9411/api/v2/spans
